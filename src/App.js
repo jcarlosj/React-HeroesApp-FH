@@ -1,9 +1,9 @@
+/** Router */
+import { AppRouter } from "./components/routers/AppRouter";
+
 const App = () => {
     return (
-        <section className="container mt-5 mb-5">
-            <h1>Heroes App</h1>
-            <hr />
-        </section>
+        <AppRouter />
     );
 }
 
