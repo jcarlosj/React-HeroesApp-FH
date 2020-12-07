@@ -6,10 +6,10 @@ import {
 } from "react-router-dom";
 
 /** Components */
-import { NavBar } from '../ui/NavBar';
-import { MarvelPage } from "../marvel/MarvelPage";
-import { DcPage } from "../dc/DcPage";
-import { HeroPage } from "../heroes/HeroPage";
+import { NavBar } from '../components/ui/NavBar';
+import { MarvelPage } from "../components/marvel/MarvelPage";
+import { DcPage } from "../components/dc/DcPage";
+import { HeroPage } from "../components/heroes/HeroPage";
 
 /** Secondary Router: Functional Component */
 export const DashboardRouter = () => {

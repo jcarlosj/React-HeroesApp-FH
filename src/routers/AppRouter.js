@@ -9,7 +9,7 @@ import {
 import { DashboardRouter } from "./DashboardRouter";
 
 /** Components */
-import { LoginPage } from "../login/LoginPage";
+import { LoginPage } from "../components/login/LoginPage";
 
 /** Main Router: Functional Component */
 export const AppRouter = () => {
