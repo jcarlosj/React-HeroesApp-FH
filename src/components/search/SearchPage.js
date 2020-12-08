@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
+
+/** Dependencies */
+import queryString from 'query-string';
 
 /** Hooks */
 import { useForm } from '../../hooks/useForm';
@@ -7,10 +11,14 @@ import { useForm } from '../../hooks/useForm';
 export const SearchPage = ({ history }) => {
 
     const 
-        [ formValues, handleInputChange, reset ] = useForm({
-            term: ''
+        location =  useLocation(),                                  //  Obtiene location usando el Hook useLocation de React.
+        { q = '' } = useMemo( () => queryString.parse( location.search ), [ location.search ] ),     //     Procesa queryString para la URL y obtiene la variable con termino(s) de búsqueda & Memoriza datos, evita obtenerlos cada que renderice el componente si 'location.search' no cambia
+        [ formValues, handleInputChange ] = useForm({
+            term: q                                                 //  Actualiza queryString del State del Formulario.
         }),
         { term } = formValues;
+
+    console.log( q, location );     //  Procesa queryString para la URL
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -20,8 +28,7 @@ export const SearchPage = ({ history }) => {
         }
 
         console.log( formValues.term );
-
-        // reset();
+        history.push( `?q=${ term }` );         //  Agrega el termino a variable en queryString en el historial de navegacion
 
     }
 
