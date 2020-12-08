@@ -10,9 +10,9 @@ export const HeroCard = ({
 }) => {
 
     return (
-        <div className="card" style={{ width: '18rem;' }}>
+        <div className="card">
             <img src={ `./assets/images/${ id }.jpg` } className="card-img-top" alt={ superhero } />
-            <div className="card-body card-info flex-fill">
+            <div className="card-body card-info">
                 <h5 className="card-title">{ superhero }</h5>
                 <p className="card-text">
                     { alter_ego } 
@@ -25,7 +25,7 @@ export const HeroCard = ({
             </div>
             <Link
                 to={ `/hero/${ id }` } 
-                class="btn btn-outline-success btn-block card-button"
+                className="btn btn-outline-success btn-block card-button"
             >Más información</Link>
         </div>
     )
