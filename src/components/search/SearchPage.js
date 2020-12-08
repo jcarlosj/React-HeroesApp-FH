@@ -23,7 +23,7 @@ export const SearchPage = ({ history }) => {
             term: q                                                 //  Actualiza queryString del State del Formulario.
         }),
         { term } = formValues,
-        heroesFiltered = getHeroesByName( term );                   //  Obtiene los resultados de la búsqueda
+        heroesFiltered = useMemo( () => getHeroesByName( q ), [ q ] );                   //  Memoriza resultados obtenidos de la búsqueda, evita obtenerlos cada que renderice el componente si 'q' no cambia. 
 
     console.log( q, location );     //  Procesa queryString para la URL
 
@@ -35,7 +35,7 @@ export const SearchPage = ({ history }) => {
         }
 
         console.log( formValues.term );
-        history.push( `?q=${ term }` );         //  Agrega el termino a variable en queryString en el historial de navegacion
+        history.push( `?q=${ term }` );         //  Agrega el termino a variable en queryString en el historial de navegacion, 'term' cambia siempre que se escribe sobre el campo.
 
     }
 
