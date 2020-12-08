@@ -51,14 +51,14 @@ export const HeroPage = ({ history }) => {
                 <div className="col-12 col-md-4">
                 <img 
                     src={ `../assets/images/${ hero_id }.jpg` } 
-                    className="img-thumbnail" 
+                    className="img-thumbnail animate__animated animate__fadeInLeft" 
                     alt={ superhero } 
                 />
                 </div>
-                <div className="col-12 col-md-8">
+                <div className="col-12 col-md-8 animate__animated animate__fadeInDown">
                     <h1>{ superhero }</h1>
                     <hr />
-                    <ul className="list-group list-group-flush">
+                    <ul className="list-group list-group-flush animate__animated animate__fadeInRight">
                         <li className="list-group-item"><strong>Alter ego: </strong> { alter_ego }</li>
                         <li className="list-group-item"><strong>Publisher: </strong> { publisher }</li>
                         <li className="list-group-item"><strong>First Appearance: </strong> { first_appearance }</li>
