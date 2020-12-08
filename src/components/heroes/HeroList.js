@@ -2,6 +2,9 @@ import React from 'react';
 
 /** Functions */
 import { getHeroesByPublisher } from '../../selectors/getHeroesByPublisher';
+import { HeroCard } from './HeroCard';
+
+import './heroes.css';
 
 /** Functional Component */
 export const HeroList = ({ publisher }) => {
@@ -9,13 +12,14 @@ export const HeroList = ({ publisher }) => {
     const heroes = getHeroesByPublisher( publisher );
 
     return (
-        <ul>
+        <div className="card-columns">
             {   heroes.map( hero => (
-                    <li
+                    <HeroCard
                         key={ hero.id }
-                    >{ hero.superhero }</li>
+                        { ...hero }
+                    />
                 ))
             }
-        </ul>
+        </div>
     )
 }
