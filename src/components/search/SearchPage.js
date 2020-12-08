@@ -4,8 +4,14 @@ import { useLocation } from 'react-router-dom';
 /** Dependencies */
 import queryString from 'query-string';
 
+/** Functions */
+import { getHeroesByName } from '../../selectors/getHeroesByName';
+
 /** Hooks */
 import { useForm } from '../../hooks/useForm';
+
+/** Components */
+import { HeroCard } from '../heroes/HeroCard';
 
 /** Functional Component */
 export const SearchPage = ({ history }) => {
@@ -16,7 +22,8 @@ export const SearchPage = ({ history }) => {
         [ formValues, handleInputChange ] = useForm({
             term: q                                                 //  Actualiza queryString del State del Formulario.
         }),
-        { term } = formValues;
+        { term } = formValues,
+        heroesFiltered = getHeroesByName( term );                   //  Obtiene los resultados de la búsqueda
 
     console.log( q, location );     //  Procesa queryString para la URL
 
@@ -60,6 +67,17 @@ export const SearchPage = ({ history }) => {
                 </form>
                 
             </div>    
+            <section className="container">
+                <div className="card-columns animate__animated animate__fadeIn">
+                    {   heroesFiltered.map( hero => (
+                            <HeroCard
+                                key={ hero.id }
+                                { ...hero }
+                            />
+                        ))
+                    }
+                </div>
+            </section>
 
         </section>
     )
