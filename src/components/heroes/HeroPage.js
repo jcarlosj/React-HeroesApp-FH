@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useParams, Redirect } from 'react-router-dom';
 
 /** Functions */
@@ -9,7 +9,7 @@ export const HeroPage = ({ history }) => {
 
     const 
         { hero_id } = useParams(),    //  Extrae los parametros que van por el URL
-        hero = getHeroById( hero_id );
+        hero = useMemo( () => getHeroById( hero_id ), [ hero_id ] );     //     Memoriza datos, evita obtenerlos cada que renderice el componente si 'hero_id' no cambia
 
     if( ! hero ) {                    //  Valida si no existen datos del heroe
         return <Redirect to="/" />;   //  Redirecciona al home
