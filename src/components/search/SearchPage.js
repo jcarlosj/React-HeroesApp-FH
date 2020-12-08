@@ -64,10 +64,18 @@ export const SearchPage = ({ history }) => {
                             className="btn btn-primary"
                         >Search now</button>
                     </div>
+        
                 </form>
                 
             </div>    
             <section className="container">
+                {   /** TO DO: Crear loading que controle visualizacion del alert de busqueda */
+                    ( q === '' ) 
+                        && <p className="alert alert-info">Search a hero...</p>
+                }
+                {   ( q !== '' && heroesFiltered.length === 0 ) 
+                        && <p className="alert alert-danger">There is no known hero named <strong>{ q }</strong></p>
+                }
                 <div className="card-columns animate__animated animate__fadeIn">
                     {   heroesFiltered.map( hero => (
                             <HeroCard
