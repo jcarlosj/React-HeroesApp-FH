@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,9 +10,16 @@ import { DashboardRouter } from "./DashboardRouter";
 
 /** Components */
 import { LoginPage } from "../components/login/LoginPage";
+import { PrivateRoute } from "./PrivateRoute";
+
+/** Contexts */
+import { AuthContext } from "../auth/AuthContext";
 
 /** Main Router: Functional Component */
 export const AppRouter = () => {
+
+    const { user: { logged } } = useContext( AuthContext );
+
     return (
         <Router>
             <div>
@@ -22,7 +29,11 @@ export const AppRouter = () => {
                 <Switch>
 
                     <Route exact path="/login" component={ LoginPage } />
-                    <Route path="/" component={ DashboardRouter } />
+                    <PrivateRoute 
+                        isAuthenticated={ logged }      //  Autenticacion (true/false): Propiedad definida esperada
+                        component={ DashboardRouter }   //  Router: Propiedad definida esperada
+                        path="/"                        //  Ruta para la que se define el acceso privado (Esto afectara a todas las rutas hijas del Router)
+                    />
                         
                 </Switch>
             </div>
