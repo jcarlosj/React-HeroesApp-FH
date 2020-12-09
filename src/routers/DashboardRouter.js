@@ -13,10 +13,10 @@ import { HeroPage } from "../components/heroes/HeroPage";
 import { SearchPage } from "../components/search/SearchPage";
 
 /** Secondary Router: Functional Component */
-export const DashboardRouter = () => {
+export const DashboardRouter = ({ history }) => {
     return (
         <>
-            <NavBar />
+            <NavBar history={ history } />
             <div>
 
                 {/* A <Switch> looks through its children <Route>s and

@@ -4,11 +4,24 @@ import { Link, NavLink } from 'react-router-dom';
 /** Contexts */
 import { AuthContext } from '../../auth/AuthContext';
 
-/** Functional Component */
-export const NavBar = () => {
+/** Types */
+import { types } from '../../types/types';
 
-    const 
-        { user: { name } } = useContext( AuthContext );
+/** Functional Component */
+export const NavBar = ({ history }) => {
+
+    const { user: { name }, dispatch } = useContext( AuthContext );
+
+    const handleLogout = () => {
+        dispatch({
+            type: types.logout,
+            payload: null
+        });
+
+        setTimeout( () => {
+            history.replace( '/login' );        //  Redirecciona a '/' y Reemplaza la entrada actual en la pila del historial, en nuestro caso '/login' ruta de este Page Component
+        }, 1500 );
+    }
 
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -54,20 +67,19 @@ export const NavBar = () => {
             </div>
 
             <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
-                <ul className="navbar-nav ml-auto">
+                <div className="navbar-nav ml-auto">
 
                     <span className="nav-item nav-link text-white">Hola, { name }</span>
 
-                    <NavLink 
+                    <button 
                         activeClassName="active"
-                        className="nav-item nav-link" 
-                        exact
-                        to="/login"
+                        className="btn btn-light" 
+                        onClick={ handleLogout }
                     >
                         Logout
-                    </NavLink>
+                    </button>
 
-                </ul>
+                </div>
             </div>
         </nav>
     )
