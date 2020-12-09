@@ -19,6 +19,12 @@ export const LoginPage = ({ history }) => {
         };
 
     const handleLogin = () => {
+
+        const 
+            defaultRoute = { pathname: '/', search: '' },
+            lastRoute = !! JSON.parse( localStorage.getItem( 'last_route' ) ) ? JSON.parse( localStorage.getItem( 'last_route' ) ) : defaultRoute; 
+
+        console.log( 'lastRoute', lastRoute.pathname );
         
         dispatch({
             type: types.login,
@@ -26,7 +32,7 @@ export const LoginPage = ({ history }) => {
         });
 
         setTimeout( () => {
-            history.replace( '/' );        //  Redirecciona a '/' y Reemplaza la entrada actual en la pila del historial, en nuestro caso '/login' ruta de este Page Component
+            history.replace( lastRoute.pathname );        //  Redirecciona a '/' y Reemplaza la entrada actual en la pila del historial, en nuestro caso '/login' ruta de este Page Component
         }, 1500 );
     }
 

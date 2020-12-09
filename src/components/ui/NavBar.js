@@ -74,7 +74,6 @@ export const NavBar = () => {
                     <span className="nav-item nav-link text-white">Hola, { name }</span>
 
                     <button 
-                        activeClassName="active"
                         className="btn btn-light" 
                         onClick={ handleLogout }
                     >

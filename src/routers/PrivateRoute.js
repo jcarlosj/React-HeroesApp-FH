@@ -8,6 +8,16 @@ export const PrivateRoute = ({
     component: Component,                   //  Propiedad definida esperada
     ...rest                                 //  Propiedades indefinidas esperadas
 }) => {
+
+    console.log( 'PrivateRoute', rest );
+
+    const lastRoute = {
+        pathname: rest.location.pathname,
+        search: rest.location.search
+    };
+
+    localStorage.setItem( 'last_route', JSON.stringify( lastRoute ) );   //  Almacena en el localstorage última ruta, última búsqueda
+
     return (
         <Route
             { ...rest }                             //  Pasa path para definir la ruta
