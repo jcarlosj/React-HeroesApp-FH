@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useHistory } from 'react-router-dom';
 
 /** Contexts */
 import { AuthContext } from '../../auth/AuthContext';
@@ -8,9 +8,11 @@ import { AuthContext } from '../../auth/AuthContext';
 import { types } from '../../types/types';
 
 /** Functional Component */
-export const NavBar = ({ history }) => {
+export const NavBar = () => {
 
-    const { user: { name }, dispatch } = useContext( AuthContext );
+    const 
+        { user: { name }, dispatch } = useContext( AuthContext ),
+        history = useHistory();         //  Este Hook de React obtiene el history de acuerdo al contexto implicito que abraza este componente
 
     const handleLogout = () => {
         dispatch({
