@@ -6,7 +6,7 @@ import { authReducer } from '../../auth/authReducer';
 /** Types */
 import { types } from '../../types/types';
 
-describe( 'todoReducer Reducer', () => {
+describe( 'authReducer Reducer', () => {
 
     test( 'debe retornar state por defecto', () => {
 
@@ -49,17 +49,22 @@ describe( 'todoReducer Reducer', () => {
 
     test( 'debe eliminar datos del usuario al salir y re-establecer state', () => {
         const 
-            initialState = { 
-                logged: false
+            state = { 
+                id: new Date().getTime(),
+                name: "Ana Maria", 
+                email: "ana.maria@correo.co",
+                logged: true 
             },
             action = {
-                type: types.logged,
+                type: types.logout,
                 payload: null
             },
-            state = authReducer( initialState, action );
+            finalState = authReducer( state, action );
 
-        // console.log( state );
-        expect( state ).toEqual( initialState );
+        // console.log( finalState );
+        expect( finalState ).toEqual({ 
+            logged: false
+        });
 
     } );
 
