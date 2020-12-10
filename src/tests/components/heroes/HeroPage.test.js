@@ -49,4 +49,31 @@ describe( 'HeroPage Component', () => {
 
     });
 
+    test( 'debe invocar handleReturn regresando a la pagina anterior usando push', () => { 
+
+        const 
+            historyMock = {
+                length: 1,
+                push: jest.fn(),
+                goBack: jest.fn()
+            },
+                    /** Esta prueba evalua al componente hijo, para ello se debe usar 'mount' para montar el componente, en el momento esta funcion no es compatible con React 17 */
+            wrapper = mount(
+                <MemoryRouter
+                    initialEntries={ [ '/hero/dc-superman' ] }      //  URL: Argumento es la ruta que necesita para renderizarse
+                >
+                    <Route 
+                        path="/hero/:hero_id" 
+                        component={ () => <HeroPage history={ historyMock } /> }        //  Paso el history al componente
+                    />
+                </MemoryRouter>
+            );
+
+        wrapper.find( 'button' ).prop( 'onClick' ) ();      //  Hace click sobre el botón Return
+
+        expect( historyMock.push ).toHaveBeenCalled();
+        expect( historyMock.goBack ).not.toHaveBeenCalled();
+
+    } );
+
 } );
