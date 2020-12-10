@@ -47,4 +47,20 @@ describe( 'todoReducer Reducer', () => {
 
     } );
 
+    test( 'debe eliminar datos del usuario al salir y re-establecer state', () => {
+        const 
+            initialState = { 
+                logged: false
+            },
+            action = {
+                type: types.logged,
+                payload: null
+            },
+            state = authReducer( initialState, action );
+
+        // console.log( state );
+        expect( state ).toEqual( initialState );
+
+    } );
+
 } );
