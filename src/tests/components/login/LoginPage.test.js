@@ -10,7 +10,7 @@ import { LoginPage } from '../../../components/login/LoginPage';
 /** Types */
 import { types } from '../../../types/types';
 
-describe( 'LoginPate Component', () => {
+describe( 'LoginPage Component', () => {
 
     const 
         contextValue = {      
@@ -50,9 +50,13 @@ describe( 'LoginPate Component', () => {
                 email: "eva.sofia@correo.co" 
             }
         });
-        expect( historyMock.replace ).toHaveBeenCalled();
+        expect( historyMock.replace ).toHaveBeenCalledWith( '/' );
+
+        localStorage.setItem( 'last_route', { pathname: '/dc', search: '' } );
+
+        wrapper.find( 'button' ).simulate( 'click' );           //  Hace click sobre el boton de login
+        expect( historyMock.replace ).toHaveBeenCalledWith( '/dc' );
 
     });
-    
 
 } );
