@@ -44,4 +44,32 @@ describe( 'PrivateRoute Component', () => {
 
     } );
 
+    test( 'no debe desplegar el componente al verificar autenticacion de usuario y verificar que se ejecuto el localStorage que guarda la ultima ruta de navegada', () => { 
+
+        /** Esta prueba evalua al componente hijo, para ello se debe usar 'mount' para montar el componente, en el momento esta funcion no es compatible con React 17 */
+        const wrapper = shallow(
+            /** <MemoryRouter> mantiene el historial de su “URL” en la memoria 
+             *  (no lee ni escribe en la barra de direcciones). Útil en pruebas 
+             * y entornos que no son de navegador como React Native */
+            <MemoryRouter>
+                <PrivateRoute 
+                    isAuthenticated={ false }
+                    component={ () => <span>Puede ser cualquier componente</span> }
+                    { ...props }
+                />
+            </MemoryRouter>
+        );
+    
+        console.log( wrapper.html() );
+        // expect( wrapper.find( 'span' ).exists() ).toBe( false );      //  En el momento de definir esta prueba la version de Enzyme no es compatible para usar mount en React 17
+        expect( localStorage.setItem ).toHaveBeenCalledWith( 
+            'last_route', 
+            JSON.stringify({
+                pathname: '/cualquiera',
+                search: ''
+            })
+        );
+    
+    } );
+
 } );
