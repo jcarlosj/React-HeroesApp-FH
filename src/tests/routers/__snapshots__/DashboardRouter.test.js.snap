@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard Router debe mostrarse correctamente 1`] = `
+<Fragment>
+  <NavBar />
+  <div>
+    <Switch>
+      <Route
+        component={[Function]}
+        exact={true}
+        path="/dc"
+      />
+      <Route
+        component={[Function]}
+        exact={true}
+        path="/marvel"
+      />
+      <Route
+        component={[Function]}
+        exact={true}
+        path="/search"
+      />
+      <Route
+        component={[Function]}
+        exact={true}
+        path="/hero/:hero_id"
+      />
+      <Redirect
+        to="/marvel"
+      />
+    </Switch>
+  </div>
+</Fragment>
+`;
