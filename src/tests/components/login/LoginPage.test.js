@@ -7,6 +7,9 @@ import { AuthContext } from '../../../auth/AuthContext';
 /** Components */
 import { LoginPage } from '../../../components/login/LoginPage';
 
+/** Types */
+import { types } from '../../../types/types';
+
 describe( 'LoginPate Component', () => {
 
     const 
@@ -34,5 +37,22 @@ describe( 'LoginPate Component', () => {
         expect( wrapper.find( 'button' ).text().trim() ).toBe( 'Login' );
 
     } );
+
+    test( 'debe invocar el dispatch y la navegacion al hacer click en el boton de login', () => {
+       
+        wrapper.find( 'button' ).simulate( 'click' );           //  Hace click sobre el boton de login
+
+        expect( contextValue.dispatch ).toHaveBeenCalledWith({
+            type: types.login,
+            payload: { 
+                id: expect.any( Number ),
+                name: "Eva Sofia", 
+                email: "eva.sofia@correo.co" 
+            }
+        });
+        expect( historyMock.replace ).toHaveBeenCalled();
+
+    });
+    
 
 } );
