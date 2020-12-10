@@ -32,6 +32,25 @@ describe( 'HeroPage Component', () => {
 
     } );
 
+    test( 'debe invocar Redirect si hero no existe', () => { 
+
+        /** Esta prueba evalua al componente hijo, para ello se debe usar 'mount' para montar el componente, en el momento esta funcion no es compatible con React 17 */
+        const wrapper = mount(
+            <MemoryRouter
+                initialEntries={ [ '/hero/no-existe' ] }      //  URL: Argumento es la ruta que necesita para renderizarse
+            >
+                <Route 
+                    path="/hero/:hero_id" 
+                    component={ () => <HeroPage history={ historyMock } /> }        //  Paso el history al componente
+                />
+            </MemoryRouter>
+        );
+
+        // console.log( wrapper.debug() );
+        expect( wrapper.text() ).toBe( '' );
+
+    } );
+
     test( 'debe mostrar el hero si el parametro existe y se encuentra', () => { 
 
         /** Esta prueba evalua al componente hijo, para ello se debe usar 'mount' para montar el componente, en el momento esta funcion no es compatible con React 17 */
