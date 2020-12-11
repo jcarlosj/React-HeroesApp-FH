@@ -60,4 +60,34 @@ describe( 'SearchPage Component', () => {
 
     } );
 
+    test( 'debe invocar redireccion usando history.push( queryString )', () => { 
+
+        const 
+            historyMock = {
+                push: jest.fn()
+            },
+            wrapper = mount(
+                <MemoryRouter initialEntries={[ '/search?q=batman' ]}>
+                    <Route
+                        path="/search"
+                        component={ () => <SearchPage history={ historyMock } /> }
+                    />
+                </MemoryRouter>
+            );
+
+            wrapper.find( 'input' ).simulate( 'change', {       //  Simula cambio de valor en la caja de texto
+                target: {
+                    name: 'term',    //  Nombre del input
+                    value: 'wonder woman'
+                }
+            } );
+
+            wrapper.find( 'form' ).prop( 'onSubmit' ) ({        //  Simula invocacion del submit del formulario
+                preventDefault(){}                              //  Simula event recibido por la funcion invocada
+            });
+
+            expect( historyMock.push ).toHaveBeenCalledWith( `?q=wonder woman` );
+
+    } );
+
 } );
